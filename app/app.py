@@ -266,7 +266,7 @@ with tab3:
         return "color: #00b4d8; font-weight: bold" if val else ""
 
     st.dataframe(
-        cox_df.style.applymap(color_sig, subset=["Significant"])
+        cox_df.style.map(color_sig, subset=["Significant"])
               .format({"HR": "{:.3f}", "HR Lower 95%": "{:.3f}",
                        "HR Upper 95%": "{:.3f}", "p-value": "{:.4f}"}),
         use_container_width=True
@@ -326,7 +326,7 @@ with tab4:
     st.pyplot(fig6)
 
     st.dataframe(
-        balance.style.applymap(
+        balance.style.map(
             lambda v: "color: #2ecc71" if v else "color: #ff6b6b",
             subset=["balanced"]
         ).format({"smd_before": "{:+.4f}", "smd_after": "{:+.4f}"}),
