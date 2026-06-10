@@ -37,6 +37,16 @@ if not Path("data/processed/icu_clean.csv").exists():
     Path("data/processed").mkdir(parents=True, exist_ok=True)
     generate_icu_cohort(2000).to_csv("data/raw/icu_cohort.csv", index=False)
     run_preprocess()
+def ensure_data():
+    if not Path("data/processed/icu_clean.csv").exists():
+        from src.data_gen import generate_icu_cohort
+        from src.preprocessing import preprocess
+        Path("data/raw").mkdir(parents=True, exist_ok=True)
+        Path("data/processed").mkdir(parents=True, exist_ok=True)
+        generate_icu_cohort(2000).to_csv("data/raw/icu_cohort.csv", index=False)
+        preprocess()
+
+ensure_data()
 
 
 @st.cache_data
